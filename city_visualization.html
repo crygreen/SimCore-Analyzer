@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SimCore City Visualizer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 { color: #4CAF50; }
+        .city-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .citizen-card {
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 15px;
+            width: 150px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        .citizen-card:hover { transform: scale(1.05); }
+        .name { font-size: 1.2em; font-weight: bold; margin-bottom: 5px; }
+        .stat { font-size: 0.9em; margin: 2px 0; }
+    </style>
+</head>
+<body>
+    <h1>SimCore City Visualizer</h1>
+    <h2>Day 37</h2>
+    <div class="city-grid">
+
+        <div class="citizen-card" style="background-color: #2e7d32;">
+            <div class="name">Genry</div>
+            <div class="stat">💰 Money: 205</div>
+            <div class="stat">❤️ Health: 82</div>
+            <div class="stat">😊 Mood: 90</div>
+            <div class="stat">🎵 Skill: 10</div>
+        </div>
+    
+        <div class="citizen-card" style="background-color: #2e7d32;">
+            <div class="name">Alex</div>
+            <div class="stat">💰 Money: 906</div>
+            <div class="stat">❤️ Health: 71</div>
+            <div class="stat">😊 Mood: 85</div>
+            <div class="stat">🎵 Skill: 22</div>
+        </div>
+    
+        <div class="citizen-card" style="background-color: #f57c00;">
+            <div class="name">Mia</div>
+            <div class="stat">💰 Money: 568</div>
+            <div class="stat">❤️ Health: 100</div>
+            <div class="stat">😊 Mood: 60</div>
+            <div class="stat">🎵 Skill: 84</div>
+        </div>
+    
+        <div class="citizen-card" style="background-color: #2e7d32;">
+            <div class="name">Ivan</div>
+            <div class="stat">💰 Money: 1275</div>
+            <div class="stat">❤️ Health: 78</div>
+            <div class="stat">😊 Mood: 90</div>
+            <div class="stat">🎵 Skill: 32</div>
+        </div>
+    
+        <div class="citizen-card" style="background-color: #2e7d32;">
+            <div class="name">Elena</div>
+            <div class="stat">💰 Money: 98</div>
+            <div class="stat">❤️ Health: 64</div>
+            <div class="stat">😊 Mood: 100</div>
+            <div class="stat">🎵 Skill: 19</div>
+        </div>
+    
+        <div class="citizen-card" style="background-color: #2e7d32;">
+            <div class="name">Max</div>
+            <div class="stat">💰 Money: 593</div>
+            <div class="stat">❤️ Health: 82</div>
+            <div class="stat">😊 Mood: 86</div>
+            <div class="stat">🎵 Skill: 52</div>
+        </div>
+    
+        <div class="citizen-card" style="background-color: #2e7d32;">
+            <div class="name">Sofia</div>
+            <div class="stat">💰 Money: 2098</div>
+            <div class="stat">❤️ Health: 100</div>
+            <div class="stat">😊 Mood: 100</div>
+            <div class="stat">🎵 Skill: 76</div>
+        </div>
+    
+        <div class="citizen-card" style="background-color: #2e7d32;">
+            <div class="name">Dmitry</div>
+            <div class="stat">💰 Money: 144</div>
+            <div class="stat">❤️ Health: 73</div>
+            <div class="stat">😊 Mood: 100</div>
+            <div class="stat">🎵 Skill: 52</div>
+        </div>
+    
+        <div class="citizen-card" style="background-color: #f57c00;">
+            <div class="name">Anna</div>
+            <div class="stat">💰 Money: 526</div>
+            <div class="stat">❤️ Health: 74</div>
+            <div class="stat">😊 Mood: 70</div>
+            <div class="stat">🎵 Skill: 74</div>
+        </div>
+    
+        <div class="citizen-card" style="background-color: #f57c00;">
+            <div class="name">Pavel</div>
+            <div class="stat">💰 Money: 1750</div>
+            <div class="stat">❤️ Health: 73</div>
+            <div class="stat">😊 Mood: 67</div>
+            <div class="stat">🎵 Skill: 68</div>
+        </div>
+    
+        <div class="citizen-card" style="background-color: #f57c00;">
+            <div class="name">Ksenia</div>
+            <div class="stat">💰 Money: 103</div>
+            <div class="stat">❤️ Health: 58</div>
+            <div class="stat">😊 Mood: 60</div>
+            <div class="stat">🎵 Skill: 12</div>
+        </div>
+    
+        <div class="citizen-card" style="background-color: #2e7d32;">
+            <div class="name">Artem</div>
+            <div class="stat">💰 Money: 286</div>
+            <div class="stat">❤️ Health: 100</div>
+            <div class="stat">😊 Mood: 100</div>
+            <div class="stat">🎵 Skill: 43</div>
+        </div>
+    
+        <div class="citizen-card" style="background-color: #c62828;">
+            <div class="name">Vika</div>
+            <div class="stat">💰 Money: 1709</div>
+            <div class="stat">❤️ Health: 80</div>
+            <div class="stat">😊 Mood: 40</div>
+            <div class="stat">🎵 Skill: 16</div>
+        </div>
+    
+    </div>
+</body>
+</html>
