@@ -5,177 +5,110 @@
     <meta charset="UTF-8">
     <title>SimCore City</title>
     <style>
-        body {
-            background-color: #121212;
-            color: white;
-            font-family: Arial, sans-serif;
-            display: flex;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-        }
-        /* Left Sidebar for Stats */
-        .sidebar {
-            width: 300px;
-            background-color: #1e1e1e;
-            padding: 20px;
-            overflow-y: auto;
-            border-right: 2px solid #333;
-        }
-        .sidebar h2 { color: #4CAF50; text-align: center; }
-        .card {
-            background-color: #2a2a2a;
-            border-radius: 8px;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-left: 5px solid #555;
-        }
-        /* Right area for Canvas */
-        .map-area {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-        canvas {
-            background-color: #1a1a1a;
-            border: 2px solid #333;
+        body { background-color: #121212; color: white; font-family: Arial; display: flex; height: 100vh; margin: 0; overflow: hidden; }
+        .sidebar { width: 300px; background-color: #1e1e1e; padding: 20px; border-right: 2px solid #333; overflow-y: auto; }
+        .card { background-color: #2a2a2a; border-radius: 8px; padding: 10px; margin-bottom: 10px; border-left: 5px solid #555; }
+        .map-area { flex-grow: 1; display: flex; justify-content: center; align-items: center; position: relative; }
+        canvas { background-color: #1a1a1a; border: 2px solid #333; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
+        /* AI DIALOGUE BOX */
+        .dialog-box {
+            position: absolute;
+            bottom: 30px;
+            background: #2a2a2a;
+            border: 2px solid #4CAF50;
             border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 20px;
+            max-width: 600px;
+            width: 80%;
+            display: block;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+            z-index: 10;
         }
+        .dialog-box h3 { margin-top: 0; color: #4CAF50; }
+        .dialog-box pre { margin: 0; color: #ddd; font-family: monospace; white-space: pre-wrap; font-size: 14px; }
     </style>
 </head>
 <body>
-    <!-- UI SIDEBAR -->
     <div class="sidebar">
-        <h2>SimCore Day 37</h2>
+        <h2>SimCore Day 88</h2>
         <div id="stats-container"></div>
     </div>
-
-    <!-- CANVAS MAP -->
     <div class="map-area">
         <canvas id="cityCanvas" width="900" height="700"></canvas>
+        
+        <!-- DIALOGUE OVERLAY -->
+        <div class="dialog-box">
+            <h3>🤖 AI Event: Street Encounter</h3>
+            <pre id="dialog-text"></pre>
+        </div>
     </div>
 
     <script>
         const canvas = document.getElementById('cityCanvas');
         const ctx = canvas.getContext('2d');
-        
-        const citizens = [{"name": "Genry", "money": 205, "health": 82, "mood": 90, "skill": 10, "home": {"x": 200, "y": 500}, "work": {"x": 600, "y": 400}, "x": 200, "y": 500, "state": "home", "timer": 0}, {"name": "Alex", "money": 906, "health": 71, "mood": 85, "skill": 22, "home": {"x": 100, "y": 500}, "work": {"x": 600, "y": 200}, "x": 100, "y": 500, "state": "home", "timer": 0}, {"name": "Mia", "money": 568, "health": 100, "mood": 60, "skill": 84, "home": {"x": 200, "y": 100}, "work": {"x": 600, "y": 400}, "x": 200, "y": 100, "state": "home", "timer": 0}, {"name": "Ivan", "money": 1275, "health": 78, "mood": 90, "skill": 32, "home": {"x": 300, "y": 500}, "work": {"x": 600, "y": 400}, "x": 300, "y": 500, "state": "home", "timer": 0}, {"name": "Elena", "money": 98, "health": 64, "mood": 100, "skill": 19, "home": {"x": 100, "y": 100}, "work": {"x": 600, "y": 200}, "x": 100, "y": 100, "state": "home", "timer": 0}, {"name": "Max", "money": 593, "health": 82, "mood": 86, "skill": 52, "home": {"x": 200, "y": 500}, "work": {"x": 600, "y": 200}, "x": 200, "y": 500, "state": "home", "timer": 0}, {"name": "Sofia", "money": 2098, "health": 100, "mood": 100, "skill": 76, "home": {"x": 100, "y": 100}, "work": {"x": 600, "y": 400}, "x": 100, "y": 100, "state": "home", "timer": 0}, {"name": "Dmitry", "money": 144, "health": 73, "mood": 100, "skill": 52, "home": {"x": 200, "y": 100}, "work": {"x": 600, "y": 400}, "x": 200, "y": 100, "state": "home", "timer": 0}, {"name": "Anna", "money": 526, "health": 74, "mood": 70, "skill": 74, "home": {"x": 300, "y": 500}, "work": {"x": 600, "y": 200}, "x": 300, "y": 500, "state": "home", "timer": 0}, {"name": "Pavel", "money": 1750, "health": 73, "mood": 67, "skill": 68, "home": {"x": 200, "y": 500}, "work": {"x": 600, "y": 200}, "x": 200, "y": 500, "state": "home", "timer": 0}, {"name": "Ksenia", "money": 103, "health": 58, "mood": 60, "skill": 12, "home": {"x": 200, "y": 100}, "work": {"x": 600, "y": 200}, "x": 200, "y": 100, "state": "home", "timer": 0}, {"name": "Artem", "money": 286, "health": 100, "mood": 100, "skill": 43, "home": {"x": 100, "y": 500}, "work": {"x": 600, "y": 400}, "x": 100, "y": 500, "state": "home", "timer": 0}, {"name": "Vika", "money": 1709, "health": 80, "mood": 40, "skill": 16, "home": {"x": 200, "y": 500}, "work": {"x": 600, "y": 400}, "x": 200, "y": 500, "state": "home", "timer": 0}];
-        const houses = [{"x": 100, "y": 100}, {"x": 200, "y": 100}, {"x": 300, "y": 100}, {"x": 100, "y": 500}, {"x": 200, "y": 500}, {"x": 300, "y": 500}];
-        const workplaces = [{"x": 600, "y": 200}, {"x": 600, "y": 400}];
+        const citizens = [{"name": "Genry", "money": 54, "health": 100, "mood": 85, "skill": 23, "x": 20, "y": 20}, {"name": "Alex", "money": 296, "health": 78, "mood": 100, "skill": 51, "x": 180, "y": 180}, {"name": "Mia", "money": 13828, "health": 100, "mood": 85, "skill": 100, "x": 240, "y": 240}, {"name": "Ivan", "money": 1145, "health": 100, "mood": 100, "skill": 31, "x": 443, "y": 424}, {"name": "Elena", "money": 54, "health": 83, "mood": 50, "skill": 11, "x": 499, "y": 356}, {"name": "Max", "money": 973, "health": 100, "mood": 20, "skill": 23, "x": 470, "y": 415}, {"name": "Sofia", "money": 21823, "health": 100, "mood": 100, "skill": 100, "x": 416, "y": 354}, {"name": "Dmitry", "money": 12512, "health": 79, "mood": 100, "skill": 85, "x": 533, "y": 337}, {"name": "Anna", "money": 18421, "health": 94, "mood": 100, "skill": 100, "x": 465, "y": 444}, {"name": "Pavel", "money": 22508, "health": 92, "mood": 100, "skill": 100, "x": 518, "y": 239}, {"name": "Ksenia", "money": 39850, "health": 100, "mood": 100, "skill": 100, "x": 677, "y": 411}, {"name": "Artem", "money": 11915, "health": 100, "mood": 100, "skill": 89, "x": 524, "y": 290}, {"name": "Vika", "money": 17224, "health": 95, "mood": 100, "skill": 96, "x": 472, "y": 274}];
+        const dialogData = {"c1": "Ivan", "c2": "Max", "text": "\"Ivan: \"Hey, nice day, huh?\"\nMax: \"Yeah, can't complain... at least I'm not broke like you.\"\nIvan: \"Hey, my wallet is fine, thanks.\"\n\nRelDelta: -2"};
 
-        // --- 1. BUILD STATS UI ---
+        // Build Sidebar
         const statsContainer = document.getElementById('stats-container');
         citizens.forEach(c => {
             let color = c.mood > 70 ? '#4CAF50' : (c.mood > 40 ? '#FF9800' : '#F44336');
-            statsContainer.innerHTML += `
-                <div class="card" style="border-left-color: ${color}">
-                    <b>${c.name}</b><br>
-                    💰 ${c.money} | ❤️ ${c.health}<br>
-                    😊 ${c.mood} | 🎵 ${c.skill}
-                </div>
-            `;
+            statsContainer.innerHTML += `<div class="card" style="border-left-color: ${color}"><b>${c.name}</b><br>💰 ${c.money} | ❤️ ${c.health}</div>`;
         });
 
-        // --- 2. DRAW MAP ENVIRONMENT ---
-        function drawEnvironment() {
-            // Draw Streets (Lines)
-            ctx.strokeStyle = '#333';
-            ctx.lineWidth = 30;
-            ctx.beginPath();
-            ctx.moveTo(100, 300); ctx.lineTo(800, 300);
-            ctx.moveTo(450, 0); ctx.lineTo(450, 700);
-            ctx.stroke();
+        // Show Dialogue text
+        if (dialogData) {
+            document.getElementById('dialog-text').innerText = dialogData.text;
+        }
 
-            // Draw Houses (Blue Squares)
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw Environment
+            ctx.strokeStyle = '#333'; ctx.lineWidth = 30;
+            ctx.beginPath(); ctx.moveTo(0, 350); ctx.lineTo(900, 350); ctx.moveTo(450, 0); ctx.lineTo(450, 700); ctx.stroke();
+            
+            // Draw Houses and Workplaces
             ctx.fillStyle = '#1E90FF';
-            houses.forEach(h => {
-                ctx.fillRect(h.x - 20, h.y - 20, 40, 40);
-            });
-
-            // Draw Workplaces (Purple Squares)
+            [[100, 100], [200, 100], [300, 100], [100, 500], [200, 500], [300, 500]].forEach(h => ctx.fillRect(h[0]-20, h[1]-20, 40, 40));
             ctx.fillStyle = '#8A2BE2';
-            workplaces.forEach(w => {
-                ctx.fillRect(w.x - 30, w.y - 30, 60, 60);
-            });
-        }
-
-        // --- 3. LOGIC & ANIMATION ---
-        function updateLogic(c) {
-            let targetX = c.x;
-            let targetY = c.y;
-
-            if (c.state === "home") {
-                c.timer++;
-                if (c.timer > 60) { // Wait 1 sec (60 frames) then go to work
-                    c.state = "going_to_work";
-                    c.timer = 0;
-                }
-            } 
-            else if (c.state === "going_to_work") {
-                targetX = c.work.x;
-                targetY = c.work.y;
-                if (Math.hypot(c.x - targetX, c.y - targetY) < 5) {
-                    c.state = "work";
-                }
-            } 
-            else if (c.state === "work") {
-                c.timer++;
-                if (c.timer > 120) { // Wait 2 secs then go home
-                    c.state = "going_home";
-                    c.timer = 0;
-                }
-            } 
-            else if (c.state === "going_home") {
-                targetX = c.home.x;
-                targetY = c.home.y;
-                if (Math.hypot(c.x - targetX, c.y - targetY) < 5) {
-                    c.state = "home";
-                }
-            }
-
-            // Move towards target
-            if (c.x !== targetX || c.y !== targetY) {
-                let dx = targetX - c.x;
-                let dy = targetY - c.y;
-                let dist = Math.hypot(dx, dy);
-                let speed = 2;
-                c.x += (dx / dist) * speed;
-                c.y += (dy / dist) * speed;
-            }
-        }
-
-        function drawCitizens() {
+            [[600, 200], [600, 400]].forEach(w => ctx.fillRect(w[0]-30, w[1]-30, 60, 60));
+            
+            // Draw Citizens
             citizens.forEach(c => {
-                // Body
-                ctx.beginPath();
-                ctx.arc(c.x, c.y, 12, 0, 2 * Math.PI);
-                ctx.fillStyle = c.mood > 70 ? '#4CAF50' : (c.mood > 40 ? '#FF9800' : '#F44336');
-                ctx.fill();
-                ctx.strokeStyle = '#fff';
+                // Determine color safely
+                let circleColor = '#FFFFFF';
+                if (c.mood !== undefined) {
+                    if (c.mood > 70) circleColor = '#4CAF50';
+                    else if (c.mood > 40) circleColor = '#FF9800';
+                    else circleColor = '#F44336';
+                }
+
+                // Draw Body
+                ctx.beginPath(); 
+                ctx.arc(c.x, c.y, 15, 0, 2 * Math.PI);
+                ctx.fillStyle = circleColor;
+                ctx.fill(); 
+                ctx.strokeStyle = '#fff'; 
                 ctx.lineWidth = 2;
                 ctx.stroke();
-
-                // Name
-                ctx.fillStyle = '#fff';
-                ctx.font = '12px Arial';
+                
+                // Draw Name (with black outline for readability)
+                ctx.font = 'bold 14px Arial'; 
                 ctx.textAlign = 'center';
-                ctx.fillText(c.name, c.x, c.y - 20);
+                
+                // Text outline
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 4;
+                ctx.strokeText(c.name, c.x, c.y - 22);
+                
+                // Text fill
+                ctx.fillStyle = '#fff'; 
+                ctx.fillText(c.name, c.x, c.y - 22);
             });
         }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawEnvironment(); // Draw houses and roads
-            citizens.forEach(c => updateLogic(c)); // Update positions
-            drawCitizens(); // Draw people
-            requestAnimationFrame(animate);
-        }
-
-        // Start animation
-        animate();
+        draw();
     </script>
 </body>
 </html>
