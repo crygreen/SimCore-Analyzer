@@ -1,0 +1,30 @@
+[
+  {
+    "day": 3,
+    "from": "Pavel",
+    "to": "Genry",
+    "action": "DONATE",
+    "amount": 50
+  },
+  {
+    "day": 3,
+    "from": "Pavel",
+    "to": "Sofia",
+    "action": "IGNORE",
+    "amount": 0
+  },
+  {
+    "day": 3,
+    "from": "Ivan",
+    "to": "Ksenia",
+    "action": "DONATE",
+    "amount": 150
+  },
+  {
+    "day": 3,
+    "from": "Ivan",
+    "to": "Ksenia",
+    "action": "DONATE",
+    "amount": 150
+  }
+]
