@@ -1,0 +1,35 @@
+[33mcommit 785b4eee2ab1059c011df1ef17c1a6285e0b7677[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: crygreen <nosaidmahap@gmail.com>
+Date:   Sat Nov 14 05:27:20 2026 -0800
+
+    feat: integrate AI dialogues, careers, and neon timeline visualizer
+
+[33mcommit 53d69f8fd8e5e3d91037a9b441fa8703b3eb63f9[m
+Author: crygreen <nosaidmahap@gmail.com>
+Date:   Sat Nov 14 05:20:19 2026 -0800
+
+    fix(ui): resolve layout overflow and make canvas responsive
+
+[33mcommit b4db4ca21ff5e2c9644bb6ac96bc5ed86bfeede8[m
+Author: crygreen <nosaidmahap@gmail.com>
+Date:   Sat Nov 14 05:06:36 2026 -0800
+
+    refactor: clean up obsolete visualizers and add AI dialogue engine
+
+[33mcommit f750c48db61eb98bf01764b5811466dfd8089b0a[m
+Author: crygreen <nosaidmahap@gmail.com>
+Date:   Sat Nov 14 00:09:31 2026 -0800
+
+    feat: combine stats UI and animated map with pathfinding
+
+[33mcommit 1dc095896cce8ec542a28ea84adac18f952b90ed[m
+Author: crygreen <nosaidmahap@gmail.com>
+Date:   Sat Nov 14 00:06:37 2026 -0800
+
+    feat: add animated canvas visualization
+
+[33mcommit 4dbe71364d949c276743c1e822b7b771a8864c26[m
+Author: crygreen <nosaidmahap@gmail.com>
+Date:   Fri Nov 13 23:40:14 2026 -0800
+
+    feat: initial commit for SimCore Python Analyzer
